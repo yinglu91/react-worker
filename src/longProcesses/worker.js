@@ -1,4 +1,4 @@
-export default () => {
+const myFunction = () => {
     self.addEventListener('message', e => { // eslint-disable-line no-restricted-globals
         if (!e) return;
 
@@ -18,6 +18,11 @@ export default () => {
             users.push(userDetails);
         }
 
-        postMessage(users);
+        console.log('yyyyy users length=', users.length)
+
+        postMessage(users);  // in main thread, event.data  ==== users
     })
 }
+
+export default myFunction
+
