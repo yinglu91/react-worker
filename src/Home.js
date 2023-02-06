@@ -26,6 +26,7 @@ const Home = () => {
                 <p className="text-center">Total User Count: {count}</p>
                 <button className="btn-worker" onClick={fetchWebWorker}>Fetch Users with Web Worker</button>
             </section>
+            <br /><br />
         </div>
     );
 }
