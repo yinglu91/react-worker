@@ -23,12 +23,13 @@ const Home = () => {
 
     // ids=[2, 1]
 
-    // 1: {id: 1, name: 'Ying Lu', age: 63}
-    // 2: {id: 2, name: 'Selena Siri', age: 26}
+    // 1: {id: 1, name: 'Mary So', age: 43}
+    // 2: {id: 2, name: 'Joe Ho', age: 16}
 
     /*
     {
-        'Look Good': {title: 'Look Good', paragraph: ''},
+        'Look Good': {title: 'Look Good', paragraph: 
+        ''},
         'Feel Good, makeover!': {title: 'Feel Good, makeover!', paragraph: ''},
         'Feel Great': {title: 'Feel Great', paragraph: '...'}
     }
@@ -50,7 +51,7 @@ const Home = () => {
 
             worker.addEventListener('message', event => {
                 console.log(event.data)
-                setBlog(event.data)  // tempary, remove later
+                setBlog(event.data)  // by now, remove later
                 // event.data
                 // setTitleParagraph(prev => (
                 //     { ...prev, [title]: { title: title, paragraph: event.data } }
@@ -74,9 +75,12 @@ const Home = () => {
     return (
         <div className="App-bottom">
             <section className="App-right">
+                <button className="btn-worker" onClick={handleCreateBlog}>
+                    Generate Blog with Web Worker
+                </button>
                 {blog && <p className="text-center">blog created: {blog}</p>}
-                <button className="btn-worker" onClick={handleCreateBlog}>Generate Blog with Web Worker</button>
 
+                <br />
                 <ReactCountdownClock seconds={100}
                     color="#e56"
                     alpha={0.9}

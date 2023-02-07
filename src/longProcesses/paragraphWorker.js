@@ -1,6 +1,6 @@
 const paramWorkerFn = () => {
-    const createParaWithTitle = (title) => {
-        let paragraph = 'ddddd' // .....
+    const createParagraph = (title) => {
+        let paragraph = `Ho Ho Ho "${title}" da da da...${Math.round(Math.random() * 20)}`
         return paragraph
     }
 
@@ -8,9 +8,9 @@ const paramWorkerFn = () => {
         if (!event) return;
 
         const title = event.data
-        let paragraph = createParaWithTitle(title)
+        const paragraph = createParagraph(title)
 
-        console.log('paragraph=', paragraph)  // paragraph= ddddd
+        console.log('paragraph=', paragraph)  // paragraph= to ... da da da...
 
         postMessage(paragraph);  // in main thread, event.data  ==== paragraph
     })
