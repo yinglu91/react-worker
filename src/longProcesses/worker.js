@@ -1,6 +1,6 @@
 const myFunction = () => {
-    self.addEventListener('message', e => { // eslint-disable-line no-restricted-globals
-        if (!e) return;
+    self.addEventListener('message', event => { // eslint-disable-line no-restricted-globals
+        if (!event) return;
 
         const users = [];
 
