@@ -50,6 +50,7 @@ const Home = () => {
 
             worker.addEventListener('message', event => {
                 console.log(event.data)
+                setBlog(event.data)  // tempary, remove later
                 // event.data
                 // setTitleParagraph(prev => (
                 //     { ...prev, [title]: { title: title, paragraph: event.data } }
@@ -73,6 +74,9 @@ const Home = () => {
     return (
         <div className="App-bottom">
             <section className="App-right">
+                {blog && <p className="text-center">blog created: {blog}</p>}
+                <button className="btn-worker" onClick={handleCreateBlog}>Generate Blog with Web Worker</button>
+
                 <ReactCountdownClock seconds={100}
                     color="#e56"
                     alpha={0.9}

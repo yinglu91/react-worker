@@ -1,21 +1,19 @@
-// title
 const paramWorkerFn = () => {
-    self.addEventListener('message', e => { // eslint-disable-line no-restricted-globals
-        if (!e) return;
+    const createParaWithTitle = (title) => {
+        let paragraph = 'ddddd' // .....
+        return paragraph
+    }
 
-        const title = e.data
+    self.addEventListener('message', event => { // eslint-disable-line no-restricted-globals
+        if (!event) return;
 
+        const title = event.data
         let paragraph = createParaWithTitle(title)
 
-        console.log('sssss paragraph=', paragraph)
+        console.log('paragraph=', paragraph)  // paragraph= ddddd
 
         postMessage(paragraph);  // in main thread, event.data  ==== paragraph
     })
-}
-
-function createParaWithTitle(title) {
-    let paragraph = 'ddddd' // .....
-    return paragraph
 }
 
 export default paramWorkerFn
