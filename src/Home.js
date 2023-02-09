@@ -6,17 +6,79 @@ import paragraphWorker from './longProcesses/paragraphWorker';
 import WebWorker from './workerSetup';
 import './App.css';
 
+import workerpool from 'workerpool'
+
+function add(a, b) {
+    return a + b
+}
+
+function fetchUser() {
+    const users = [];
+
+    const userDetails = {
+        name: 'Jane Doe',
+        email: 'jane.doe@gmail.com',
+        id: 1
+    };
+
+    for (let i = 0; i < 10000000; i++) {
+
+        userDetails.id = i++
+        userDetails.dateJoined = Date.now()
+
+        users.push(userDetails);
+    }
+
+    return users;
+}
+
 const Home = () => {
     // const worker = useMemo(() => new WebWorker(worker1), [])
     const [count, setCount] = useState(0)
 
-    const fetchWebWorker = () => {
-        const worker = new WebWorker(worker1)
-        worker.postMessage('Fetch Users');
+    //const pool1 = useMemo(() => workerpool.pool(), []);
 
-        worker.addEventListener('message', event => {
-            setCount(event.data.length)     // event.data is users which is an array
-        });
+    const fetchWebWorker = async () => {
+        const titles1 = ['Feel Good', 'f1', "f2"]
+        let st = ''
+        for (let title of titles1) {
+            setCount(0)
+
+            // https://www.youtube.com/watch?v=yI1PjfXhIpk
+            // https://javascript.plainenglish.io/multitasking-in-node-js-using-worker-pool-201ac6dfd0f4
+            try {
+                const pool = workerpool.pool()
+                const result = await pool.exec(fetchUser, [])
+                setCount(result.length)
+                st += ', ' + result.length
+                console.log(title, ', ', st)
+            } catch (error) {
+                console.log(error)
+            } finally {
+                // pool.terminate()
+            }
+
+        }
+
+        setBlog(st)
+
+        // pool1
+        //     // .exec(add, [2, 4])
+        //     .exec(fetchUser, [])
+        //     .then(function (result) {
+        //         console.log(result); // will output 6
+        //         setCount(result.length)
+        //     })
+        //     .catch(function (err) {
+        //         console.error(err);
+        //     });
+
+        // const worker = new WebWorker(worker1)
+        // worker.postMessage('Fetch Users');
+
+        // worker.addEventListener('message', event => {
+        //     setCount(event.data.length)     // event.data is users which is an array
+        // });
 
         // worker.close()
     }
